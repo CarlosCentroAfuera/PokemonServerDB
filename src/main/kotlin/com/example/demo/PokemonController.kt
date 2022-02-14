@@ -1,10 +1,7 @@
 package com.example.demo
 
 import com.google.gson.Gson
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class PokemonController(private val pokemonRepository: PokemonRepository) {
@@ -57,6 +54,12 @@ class PokemonController(private val pokemonRepository: PokemonRepository) {
 
     @GetMapping("insertPokemonJson")
     fun insertPokemonJson(@RequestBody pokemon : Pokemon) {
+        pokemonRepository.save(pokemon)
+        pokemonRepository.findAll().forEach { println(it) }
+    }
+
+    @PostMapping("pokemonBody")
+    fun insertStudent(@RequestBody pokemon : Pokemon){
         pokemonRepository.save(pokemon)
         pokemonRepository.findAll().forEach { println(it) }
     }
